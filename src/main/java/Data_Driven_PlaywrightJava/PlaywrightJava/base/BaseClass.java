@@ -3,6 +3,7 @@ package Data_Driven_PlaywrightJava.PlaywrightJava.base;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.nio.file.Paths;
+import java.util.Properties;
 
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -29,7 +30,7 @@ public class BaseClass
 	protected static String url;
 	protected static String headless;
 	
-	PropertyReader prop;
+	Properties prop = PropertyReader.intializeProperties();
 	
 	@BeforeMethod(alwaysRun = true)
 	public void setUp()
@@ -109,6 +110,12 @@ public class BaseClass
 		context.tracing().stop(new Tracing.StopOptions().setPath(Paths.get("trace.zip")));
 		browser.close();
 		playwright.close();
+		
+	}
+	
+	public static Page getPageInstance()
+	{
+		return page;
 		
 	}
 }
